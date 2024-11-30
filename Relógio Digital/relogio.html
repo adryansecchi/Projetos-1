@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="relogio.png">
+    <title>Relógio Digital</title>
+    <style>
+        *{
+            background-color: black;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        body{
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 700px;
+            flex-direction: column;
+            font-size: 30px;
+            margin-bottom: 2px;
+        }
+        .relogiodig{
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            font-size: 200px;
+        }
+        .relogiodig span{
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+        .relogiodig span:not(:last-child)::after{
+            content: ': ';
+            font-size: 180px;
+            margin-bottom: 20px;
+            color: gray;
+        }
+        p{
+            font-family: 'Times New Roman', Times, serif;
+            color: pink;
+        }
+        p i{
+            color: cyan;
+        }
+    </style>
+</head>
+<body>
+    <div class="relogiodig">
+        <span id="horas">00</span>
+        <span id="minutos">00</span>
+        <span id="segundos">00</span>
+    </div>
+    <p>Feito por <i>Adryan Secchi</i></p>
+</body>
+<script>
+    const horasElement = document.getElementById('horas')
+    const minutosElement = document.getElementById('minutos')
+    const segundosElement = document.getElementById('segundos')
+
+    function newTime(){
+        const date = new Date()
+
+        const horas = date.getHours()
+        const minutos = date.getMinutes()
+        const segundos = date.getSeconds()
+
+        horasElement.textContent = fixtime(horas)
+        minutosElement.textContent = fixtime(minutos)
+        segundosElement.textContent = fixtime(segundos)
+    }
+    function fixtime(time){
+        return time <10 ? '0'+time : time
+    }
+    newTime()
+    setInterval(newTime, 1000)
+</script>
+</html>
