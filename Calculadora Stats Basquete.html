@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Eficiência e 'True Shooting'</title>
+</head>
+<style>
+    body{
+        background-image: linear-gradient(45deg, red, green, purple);
+        font-family: 'Times New Roman', Times, serif;
+    }
+    h1{
+        text-align: center;
+        color: white;
+    }
+    .CalcDiv{
+        position: absolute;
+        background-color: cyan;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px;
+        border: 2px solid black;
+        border-radius: 10px;
+    }
+    input{
+        padding: 3px;
+        outline: none;
+        border: none;
+        border-radius: 6px;
+    }
+    button{
+        width: 100%;
+        background-color: white;
+        border: none;
+        outline: none;
+        padding: 5px;
+        border-radius: 6px;
+    }
+    button:hover{
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div class="CalcTodo">
+        <div class="NomeInicial">
+            <h1>Adryan Secchi</h1>
+        </div>
+        <div class="CalcDiv">
+            <input type="text" id="Pontos" name="pontos" placeholder="Pontos Feitos">
+            <br><br>
+            <input type="text" id="Rebotes" name="rebotes" placeholder="Rebotes Totais">
+            <br><br>
+            <input type="text" id="Tocos" name="tocos" placeholder="Tocos">
+            <br><br>
+            <input type="text" id="Steals" name="steals" placeholder="Roubadas de Bola">
+            <br><br>
+            <input type="text" id="Assistencias" name="assistencias" placeholder="Assistências">
+            <br><br>
+            <input type="text" id="arre_errados" name="arre_errados" placeholder="Arremessos Errados">
+            <br><br>
+            <input type="text" id="turnovers" name="turnovers" placeholder="Perdas de Bola">
+            <br><br>
+            <input type="text" id="faltas" name="faltas" placeholder="Faltas Cometidas">
+            <br><br>
+            <input type="text" id="arre_tentativa" name="arre_tentativa" placeholder="Arremessos tentados">
+            <br><br>
+            <input type="text" id="lance_tentativa" name="lance_tentativa" placeholder="Lances livres Tentados">
+            <br><br>
+            <div class="SelecionarStats">
+                <input type="radio" id="eficiencia" name="estatistica" value="eficiencia">
+                <label for="eficiencia">Eficiência</label>
+                <br>
+                <input type="radio" id="true_shooting" name="estatistica" value="true_shooting">
+                <label for="true_shooting">True Shooting (TS%)</label>
+                <br><br>
+                <button onclick="calcular()">Enviar</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function calcular()
+    {
+        var pontos = parseInt(document.querySelector('#Pontos').value);
+        var rebotes = parseInt(document.querySelector('#Rebotes').value);
+        var tocos = parseInt(document.querySelector('#Tocos').value);
+        var steals = parseInt(document.querySelector('#Steals').value);
+        var assistencias = parseInt(document.querySelector('#Assistencias').value);
+        var arreerrados = parseInt(document.querySelector('#arre_errados').value);
+        var turnover = parseInt(document.querySelector('#turnovers').value);
+        var falta = parseInt(document.querySelector('#faltas').value);
+        var arretentativa = parseInt(document.querySelector('#arre_tentativa').value);
+        var lancelivre = parseInt(document.querySelector('#lance_tentativa').value);
+        var selecionar_estatistica = document.querySelector('input[name="estatistica"]:checked').value;
+        var nome_estatistica, calculo
+        if(selecionar_estatistica == 'eficiencia')
+        {
+            nome_estatistica = "Eficiência"
+            calculo = (pontos + rebotes + tocos + steals + assistencias) - (arreerrados + turnover + falta);
+        }
+        else if(selecionar_estatistica == 'true_shooting')
+        {
+            nome_estatistica = "True Shooting"
+            calculo = (pontos / (2 * (arretentativa + 0.44 * lancelivre))) * 100
+        }
+        alert(nome_estatistica+': ' + calculo)
+    }   
+</script>
+</html>
