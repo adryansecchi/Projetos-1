@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Nutrição</title>
+    <style>
+        body{
+            background-image: linear-gradient(45deg, yellow, yellowgreen, green);
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .DivNome{
+            text-align: center;
+        }
+        .DivCalc{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: gray;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid white;
+        }
+        h2{
+            text-align: center;
+        }
+        input{
+            border-radius: 5px;
+            outline: none;
+            border: 1px solid blue;
+            padding: 5px;
+        }
+        button{
+            width: 100%;
+            padding: 3px;
+            border-radius: 5px;
+            outline: none;
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+        }
+        button:hover{
+            color: white;
+            background-color: black;
+            border: 2px solid white;
+            transition: .5s;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>  
+    <div class="DivCalc">
+        <h2>Calculadora</h2>
+        <div class="DivInput">
+            <input type="number" id="peso" name="peso" class="peso" placeholder="Insira seu peso em kg">
+            <br><br>
+            <input type="number" id="altura" name="peso" class="altura" placeholder="Insira sua altura em cm"> 
+            <br><br>
+            <input type="number" id="idade" name="peso" class="idade" placeholder="Insira sua Idade">
+            <br>
+        </div>
+            <div class="DivResultado">
+                <p>Cálculos</p>
+                <input type="radio" id="basalmasc" name="calc" value="basalmasc">
+                <label for="basalmasc">Cálculo Basal Masculino</label>
+                <br><br>
+                <input type="radio" id="basalfem" name="calc" value="basalfem"> 
+                <label for="basalfem">Cálculo Basal Feminino</label>
+                <br><br>
+                <input type="radio" id="agua" name="calc" value="agua">
+                <label for="agua">Água</label>
+                <br><br>
+                <input type="radio" id="proteina" name="calc" value="proteina">
+                <label for="proteina">Proteína diária</label>
+                <br><br>
+                <input type="radio" id="carb" name="calc" value="carb">
+                <label for="carb">Carboidrato diario</label>
+                <br><br>
+                <input type="radio" id="creatina" name="calc" value="creatina">
+                <label for="creatina">Creatina</label>
+                <br><br>
+                <input type="radio" id="imc" name="calc" value="imc">
+                <label for="imc">IMC</label>
+                <br><br>
+            </div>
+        <button onclick="calcular()">Calcular</button>
+    </div>
+</body>
+<script>
+    function calcular()
+    {
+        var peso = document.querySelector('#peso').value;
+        var altura = document.querySelector('#altura').value;
+        var idade = document.querySelector('#idade').value;
+        var selecionarcalculo = document.querySelector('input[name="calc"]:checked').value;
+        var nomecalculo, calculo
+        if(selecionarcalculo == 'basalmasc')
+    {
+        nomecalculo = 'Cálculo Basal Masculino'
+        calculo = 88.362 + (13.397 * peso) + (4.799 * altura) - (5.677 * idade)
+    }
+    else if(selecionarcalculo == 'basalfem')
+    {
+        nomecalculo = 'Cálculo Basal Feminino'
+
+        calculo = 447.593 + (9.247 * peso) + (3.098 * altura) - (4.330 * idade)
+    }
+    else if(selecionarcalculo == 'agua')
+    {
+        nomecalculo = 'Água diária (L)'
+        calculo = 0.035 * peso
+    }
+    else if(selecionarcalculo == 'proteina')
+    {
+        nomecalculo = 'Proteína Diária em gramas'
+        calculo = 2 * peso
+    }
+    else if(selecionarcalculo == 'carb')
+    {
+        nomecalculo = 'Carboidrato diário em gramas'
+        calculo = 4 * peso
+    }
+    else if(selecionarcalculo == 'creatina')
+    {
+        nomecalculo =  'Creatina Diária (g)'
+        calculo = 0.07 * peso
+    }
+    else if(selecionarcalculo == 'imc')
+    {
+        nomecalculo = 'IMC'
+        calculo = peso / ((altura/100) * (altura/100))
+    }
+    alert(nomecalculo+': ' + calculo);
+    }
+</script>
+</html>
